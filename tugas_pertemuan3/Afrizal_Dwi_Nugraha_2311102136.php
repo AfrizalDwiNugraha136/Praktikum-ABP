@@ -1,6 +1,13 @@
 <?php
-// 1. Array Asosiasi untuk menyimpan minimal 3 data mahasiswa
+// 1. Array Asosiasi untuk menyimpan data mahasiswa
 $data_mahasiswa = [
+    [
+        "nama" => "Handi Satrio",
+        "nim" => "2311102130",
+        "nilai_tugas" => 85,
+        "nilai_uts"   => 78,
+        "nilai_uas"   => 80,
+    ],
     [
         "nama" => "Afrizal Dwi Nugraha",
         "nim" => "2311102136",
@@ -21,18 +28,25 @@ $data_mahasiswa = [
         "nilai_tugas" => 50,
         "nilai_uts" => 45,
         "nilai_uas" => 55
+    ],
+    [
+        "nama" => "Ajiz Fahturahman",
+        "nim" => "2311102131",
+        "nilai_tugas" => 40,
+        "nilai_uts"   => 45,
+        "nilai_uas"   => 38,
     ]
 ];
 
 // 2. Function dan Operator Aritmatika untuk menghitung nilai akhir
-function hitungNilaiAkhir($tugas, $uts, $uas) {
-    // Menggunakan operator aritmatika: perkalian (*) dan penjumlahan (+)
-    // Asumsi bobot: Tugas 30%, UTS 30%, UAS 40%
+function hitungNilaiAkhir($tugas, $uts, $uas)
+{
     return ($tugas * 0.3) + ($uts * 0.3) + ($uas * 0.4);
 }
 
 // 3. If/else untuk menentukan grade
-function tentukanGrade($nilai) {
+function tentukanGrade($nilai)
+{
     if ($nilai >= 85) {
         return 'A';
     } elseif ($nilai >= 70) {
@@ -47,8 +61,8 @@ function tentukanGrade($nilai) {
 }
 
 // 4. Operator perbandingan untuk menentukan lulus/tidak
-function tentukanStatus($nilai) {
-    // Menggunakan operator perbandingan (>=)
+function tentukanStatus($nilai)
+{
     if ($nilai >= 60) {
         return "<span style='color:green; font-weight:bold;'>Lulus</span>";
     } else {
@@ -64,22 +78,83 @@ $jumlah_mahasiswa = count($data_mahasiswa);
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Penilaian Mahasiswa</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-        th { background-color: #007bff; color: white; }
-        tr:nth-child(even) { background-color: #f2f2f2; }
-        .statistik { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 5px; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* CSS tambahan untuk Header dan Badge */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            color: #222;
+        }
+
+        header p {
+            margin: 0;
+            color: #666;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .statistik {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
     </style>
 </head>
+
 <body>
 
-    <h2>Data Penilaian Mahasiswa</h2>
+    <header>
+        <div class="badge">Made by &middot; Afrizal Dwi Nugraha | 2311102136</div>
+        <h1>Rekap Penilaian Mahasiswa</h1>
+        <p>Perhitungan nilai akhir, grade, dan status kelulusan</p>
+    </header>
 
     <table>
         <thead>
@@ -87,6 +162,9 @@ $jumlah_mahasiswa = count($data_mahasiswa);
                 <th>No</th>
                 <th>Nama</th>
                 <th>NIM</th>
+                <th>Nilai Tugas</th>
+                <th>Nilai UTS</th>
+                <th>Nilai UAS</th>
                 <th>Nilai Akhir</th>
                 <th>Grade</th>
                 <th>Status</th>
@@ -113,10 +191,14 @@ $jumlah_mahasiswa = count($data_mahasiswa);
                 echo "<td>{$no}</td>";
                 echo "<td>{$mhs['nama']}</td>";
                 echo "<td>{$mhs['nim']}</td>";
+                echo "<td>{$mhs['nilai_tugas']}</td>";
+                echo "<td>{$mhs['nilai_uts']}</td>";
+                echo "<td>{$mhs['nilai_uas']}</td>";
                 echo "<td>" . number_format($nilai_akhir, 2) . "</td>";
                 echo "<td>{$grade}</td>";
                 echo "<td>{$status}</td>";
                 echo "</tr>";
+
                 $no++;
             }
             ?>
@@ -124,14 +206,15 @@ $jumlah_mahasiswa = count($data_mahasiswa);
     </table>
 
     <?php
-    // Menghitung rata-rata kelas menggunakan operator aritmatika pembagian (/)
+    // Menghitung rata-rata kelas
     $rata_rata_kelas = $total_nilai / $jumlah_mahasiswa;
     ?>
 
     <div class="statistik">
-        <p><strong>Rata-rata Nilai Kelas:</strong> <?php echo number_format($rata_rata_kelas, 2); ?></p>
-        <p><strong>Nilai Tertinggi:</strong> <?php echo number_format($nilai_tertinggi, 2); ?></p>
+        <p><strong>Rata-rata Nilai Akhir Kelas:</strong> <?php echo number_format($rata_rata_kelas, 2); ?></p>
+        <p><strong>Nilai Akhir Tertinggi:</strong> <?php echo number_format($nilai_tertinggi, 2); ?></p>
     </div>
 
 </body>
+
 </html>
