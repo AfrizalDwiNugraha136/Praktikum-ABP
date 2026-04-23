@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Modul AJAX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #hasil-profil {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Data Profil AJAX</h2>
+
+    <button id="btn-tampil">Tampilkan Profil</button>
+
+    <div id="hasil-profil"></div>
+
+    <script>
+        // Menangkap elemen tombol dan div hasil
+        const btnTampil = document.getElementById('btn-tampil');
+        const hasilProfil = document.getElementById('hasil-profil');
+
+        // Menambahkan event ketika tombol diklik
+        btnTampil.addEventListener('click', function () {
+
+            // Menggunakan fetch untuk request ke data.php
+            fetch('data.php')
+                .then(response => {
+                    // Cek jika response dari server tidak OK
+                    if (!response.ok) {
+                        throw new Error('Gagal mengambil data dari server');
+                    }
+                    // Parse response menjadi JSON
+                    return response.json();
+                })
+                .then(data => {
+                    // Menampilkan data sesuai dengan format instruksi
+                    hasilProfil.innerHTML = `Nama: ${data.nama} | Pekerjaan: ${data.pekerjaan} | Lokasi: ${data.lokasi}`;
+                })
+                .catch(error => {
+                    // Menampilkan pesan error jika terjadi masalah
+                    hasilProfil.innerHTML = `Terjadi kesalahan: ${error.message}`;
+                });
+
+        });
+    </script>
+</body>
+
+</html>
