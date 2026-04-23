@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="id">
 
@@ -64,4 +65,143 @@
     </script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Modul AJAX - Profil</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
+
+        .profile-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .header-bg {
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+            height: 120px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin-top: -60px;
+            /* Menarik foto ke atas menabrak background */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-md-6 col-lg-4">
+
+            <div id="pesan-error" class="alert alert-danger d-none mb-3 shadow-sm" role="alert"></div>
+
+            <div class="card profile-card border-0">
+                <div class="header-bg"></div>
+                <div class="card-body text-center pb-4">
+
+                    <img src="https://ui-avatars.com/api/?name=Afrizal+Dwi+Nugraha&background=random&size=150"
+                        alt="Avatar" class="avatar mb-3">
+
+                    <div id="teks-instruksi" class="mb-4 text-muted">
+                        <p>Data profil belum dimuat. Klik tombol di bawah untuk memanggil AJAX.</p>
+                    </div>
+
+                    <div id="data-profil" class="d-none mb-4">
+                        <h4 class="card-title fw-bold mb-1 text-dark" id="res-nama">Nama Placeholder</h4>
+                        <p class="text-primary fw-semibold mb-2" id="res-pekerjaan">Pekerjaan Placeholder</p>
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-geo-alt-fill text-danger"></i> <span id="res-lokasi">Lokasi
+                                Placeholder</span>
+                        </p>
+                    </div>
+
+                    <button id="btn-tampil" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                        <i class="bi bi-cloud-download me-2"></i>Tampilkan Profil
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Menangkap elemen-elemen HTML
+        const btnTampil = document.getElementById('btn-tampil');
+        const dataProfil = document.getElementById('data-profil');
+        const teksInstruksi = document.getElementById('teks-instruksi');
+        const pesanError = document.getElementById('pesan-error');
+
+        btnTampil.addEventListener('click', function () {
+            // 1. Ubah tombol jadi state loading saat diklik
+            const teksAsli = btnTampil.innerHTML;
+            btnTampil.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Mengambil Data...';
+            btnTampil.disabled = true;
+            pesanError.classList.add('d-none');
+
+            // 2. Simulasi delay 0.8 detik agar efek loading terlihat estetik
+            setTimeout(() => {
+
+                // 3. Memulai request AJAX menggunakan Fetch API
+                fetch('data.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Gagal terhubung ke server');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Memasukkan data JSON dari PHP ke elemen HTML
+                        document.getElementById('res-nama').innerText = data.nama;
+                        document.getElementById('res-pekerjaan').innerText = data.pekerjaan;
+                        document.getElementById('res-lokasi').innerText = data.lokasi;
+
+                        // Menyembunyikan teks instruksi dan menampilkan profil
+                        teksInstruksi.classList.add('d-none');
+                        dataProfil.classList.remove('d-none');
+
+                        // Mengubah tombol menjadi hijau sukses
+                        btnTampil.innerHTML = '<i class="bi bi-check-circle me-2"></i>Data Berhasil Dimuat';
+                        btnTampil.classList.replace('btn-primary', 'btn-success');
+                    })
+                    .catch(error => {
+                        // Menampilkan error jika gagal
+                        pesanError.innerText = `Terjadi kesalahan: ${error.message}`;
+                        pesanError.classList.remove('d-none');
+
+                        // Kembalikan tombol ke keadaan semula
+                        btnTampil.innerHTML = teksAsli;
+                        btnTampil.disabled = false;
+                    });
+
+            }, 800);
+        });
+    </script>
+</body>
+
+>>>>>>> f3ae24f7c065a8738a14839a64c4fb0f4662e530
 </html>
