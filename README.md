@@ -265,4 +265,4 @@ Dibeveloped dengan ❤️ untuk Pak Cokomi dan Mas Wowo.
 
 ## 📄 Lisensi
 
-MIT License — bebas digunakan dan dimodifikasi.
+Afrizal Dwi Nugraha-2311102136
