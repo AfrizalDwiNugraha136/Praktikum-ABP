@@ -1,7 +1,7 @@
 # 📱 Tugas Praktikum Flutter - Pemrograman Aplikasi Bergerak
 
 Proyek ini merupakan implementasi berbagai macam widget dasar di Flutter seperti `Stack`, `Container`, `ListView`, dan `GridView`.  
-Aplikasi ini dibangun sebagai bagian dari tugas mata kuliah Pemrograman Aplikasi Bergerak di ✨ :contentReference[oaicite:0]{index=0} ✨
+Aplikasi ini dibangun sebagai bagian dari tugas mata kuliah Pemrograman Aplikasi Bergerak di Telkom University Purwokerto.
 
 ---
 
@@ -39,7 +39,7 @@ Menampilkan daftar item secara vertikal.
 
 Implementasi meliputi:
 - `ListView` manual untuk data statis
-- Potensi penggunaan `ListView.builder` untuk data dinamis
+- `ListView.builder` untuk data dinamis
 
 ---
 
@@ -67,7 +67,8 @@ Cocok digunakan untuk:
 
 # ▶️ Cara Menjalankan Proyek
 
-## 1. Pastikan Flutter SDK Sudah Terpasang
+## 1️⃣ Pastikan Flutter SDK Sudah Terpasang
+
 Tambahkan Flutter ke PATH sistem:
 
 ```bash
